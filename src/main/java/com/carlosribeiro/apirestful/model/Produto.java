@@ -1,9 +1,6 @@
 package com.carlosribeiro.apirestful.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -28,7 +25,10 @@ public class Produto {
     private int qtdEstoque;
     private BigDecimal preco;
     private LocalDate dataCadastro;
-    private String categoria;
+
+    @ManyToOne
+    @JoinColumn(name = "categoria_id", foreignKey = @ForeignKey(name = "PRODUTO_CATEGORIA_CATEGORIA_ID_FK"))
+    private Categoria categoria;
 
     public Produto(String imagem,
                    String nome,
@@ -37,7 +37,7 @@ public class Produto {
                    int qtdEstoque,
                    BigDecimal preco,
                    LocalDate dataCadastro,
-                   String categoria) {
+                   Categoria categoria) {
         this.imagem = imagem;
         this.nome = nome;
         this.descricao = descricao;

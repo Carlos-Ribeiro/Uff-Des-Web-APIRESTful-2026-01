@@ -16,7 +16,7 @@ public class ProdutoService {
     private ProdutoRepository produtoRepository;
 
     public List<Produto> recuperarProduos() {
-        return produtoRepository.findAll();
+        return produtoRepository.recuperarProduos();
     }
 
     public Produto recuperarProdutoPorId(long id) {
