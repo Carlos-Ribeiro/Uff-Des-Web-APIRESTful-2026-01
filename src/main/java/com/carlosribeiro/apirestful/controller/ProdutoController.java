@@ -1,5 +1,6 @@
 package com.carlosribeiro.apirestful.controller;
 
+import com.carlosribeiro.apirestful.dto.ProdutoDto;
 import com.carlosribeiro.apirestful.exception.EntidadeNaoEncontradaException;
 import com.carlosribeiro.apirestful.model.Produto;
 import com.carlosribeiro.apirestful.service.ProdutoService;
@@ -19,7 +20,7 @@ public class ProdutoController {
 
     // http://localhost:8080/produtos
     @GetMapping
-    public List<Produto> recuperarProdutos() {
+    public List<ProdutoDto> recuperarProdutos() {
         return produtoService.recuperarProduos();
     }
 

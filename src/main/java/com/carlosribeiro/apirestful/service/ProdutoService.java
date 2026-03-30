@@ -1,6 +1,8 @@
 package com.carlosribeiro.apirestful.service;
 
+import com.carlosribeiro.apirestful.dto.ProdutoDto;
 import com.carlosribeiro.apirestful.exception.EntidadeNaoEncontradaException;
+import com.carlosribeiro.apirestful.mapper.ProdutoMapper;
 import com.carlosribeiro.apirestful.model.Produto;
 import com.carlosribeiro.apirestful.repository.ProdutoRepository;
 import jakarta.transaction.Transactional;
@@ -15,8 +17,12 @@ public class ProdutoService {
     @Autowired
     private ProdutoRepository produtoRepository;
 
-    public List<Produto> recuperarProduos() {
-        return produtoRepository.recuperarProduos();
+    @Autowired
+    private ProdutoMapper produtoMapper;
+
+    public List<ProdutoDto> recuperarProduos() {
+        List<Produto> produtos = produtoRepository.recuperarProduos();
+        return produtoMapper.toProdutosDto(produtos);
     }
 
     public Produto recuperarProdutoPorId(long id) {

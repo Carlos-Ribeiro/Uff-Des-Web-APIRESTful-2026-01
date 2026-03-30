@@ -59,6 +59,12 @@
             <artifactId>spring-boot-starter-webmvc-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+            <version>1.5.5.Final</version> <!-- Use a versão estável mais recente -->
+        </dependency>
     </dependencies>
 
     <build>
@@ -72,6 +78,13 @@
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
                         </path>
+                        <!-- MapStruct Processor -->
+                        <path>
+                            <groupId>org.mapstruct</groupId>
+                            <artifactId>mapstruct-processor</artifactId>
+                            <version>1.5.5.Final</version>
+                        </path>
+                        <!-- Se usar Lombok, ele deve vir ANTES do mapstruct-processor -->
                     </annotationProcessorPaths>
                 </configuration>
             </plugin>
