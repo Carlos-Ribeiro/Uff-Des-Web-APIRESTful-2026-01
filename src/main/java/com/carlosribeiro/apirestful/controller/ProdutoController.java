@@ -1,9 +1,11 @@
 package com.carlosribeiro.apirestful.controller;
 
+import com.carlosribeiro.apirestful.dto.ProdutoCreate;
 import com.carlosribeiro.apirestful.dto.ProdutoDto;
 import com.carlosribeiro.apirestful.exception.EntidadeNaoEncontradaException;
 import com.carlosribeiro.apirestful.model.Produto;
 import com.carlosribeiro.apirestful.service.ProdutoService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +28,7 @@ public class ProdutoController {
 
     // http://localhost:8080/produtos/1
     @GetMapping("{idProduto}")
-    public Produto recuperarProdutoPorId(@PathVariable("idProduto") long id) {
+    public ProdutoDto recuperarProdutoPorId(@PathVariable("idProduto") long id) {
         return produtoService.recuperarProdutoPorId(id);
     }
 
@@ -41,12 +43,12 @@ public class ProdutoController {
 //    }
 
     @PostMapping
-    public Produto cadastrarProduto(@RequestBody Produto produto) {
-        return produtoService.cadastrarProduo(produto);
+    public ProdutoDto cadastrarProduto(@RequestBody @Valid ProdutoCreate produtoCreate) {
+        return produtoService.cadastrarProduo(produtoCreate);
     }
 
     @PutMapping
-    public Produto alterarProduto(@RequestBody Produto produto) {
+    public ProdutoDto alterarProduto(@RequestBody ProdutoDto produto) {
         return produtoService.alterarProduo(produto);
     }
 

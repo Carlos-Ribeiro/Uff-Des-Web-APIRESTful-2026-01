@@ -1,6 +1,7 @@
 package com.carlosribeiro.apirestful.mapper;
 
 import com.carlosribeiro.apirestful.dto.CategoriaResumo;
+import com.carlosribeiro.apirestful.dto.ProdutoCreate;
 import com.carlosribeiro.apirestful.dto.ProdutoDto;
 import com.carlosribeiro.apirestful.model.Categoria;
 import com.carlosribeiro.apirestful.model.Produto;
@@ -17,4 +18,9 @@ public interface ProdutoMapper {
     @Mapping(source = "categoria", target = "categoriaResumo")
     ProdutoDto toProdutoDto(Produto produto);
 
+    @Mapping(source = "categoriaResumo", target = "categoria")
+    Produto toProduto(ProdutoCreate produtoCreate);
+
+    @Mapping(source = "categoriaResumo", target = "categoria")
+    Produto toProduto(ProdutoDto produtoDto);
 }

@@ -1,5 +1,6 @@
 package com.carlosribeiro.apirestful.service;
 
+import com.carlosribeiro.apirestful.dto.ProdutoCreate;
 import com.carlosribeiro.apirestful.dto.ProdutoDto;
 import com.carlosribeiro.apirestful.exception.EntidadeNaoEncontradaException;
 import com.carlosribeiro.apirestful.mapper.ProdutoMapper;
@@ -25,18 +26,23 @@ public class ProdutoService {
         return produtoMapper.toProdutosDto(produtos);
     }
 
-    public Produto recuperarProdutoPorId(long id) {
-        return produtoRepository.findById(id)
+    public ProdutoDto recuperarProdutoPorId(long id) {
+        Produto produto = produtoRepository.findById(id)
             .orElseThrow(() -> new EntidadeNaoEncontradaException(
                 "Produto com id = " + id + " não encontrado."));
+        return produtoMapper.toProdutoDto(produto);
     }
 
-    public Produto cadastrarProduo(Produto produto) {
-        return produtoRepository.save(produto);
+    public ProdutoDto cadastrarProduo(ProdutoCreate produtoCreate) {
+        Produto produto = produtoMapper.toProduto(produtoCreate);
+        produto = produtoRepository.save(produto);
+        return produtoMapper.toProdutoDto(produto);
     }
 
-    public Produto alterarProduo(Produto produto) {
-        return produtoRepository.save(produto);
+    public ProdutoDto alterarProduo(ProdutoDto produtoDto) {
+        Produto produto = produtoMapper.toProduto(produtoDto);
+        produto = produtoRepository.save(produto);
+        return produtoMapper.toProdutoDto(produto);
     }
 
     public void removerProduoPorId(long id) {
