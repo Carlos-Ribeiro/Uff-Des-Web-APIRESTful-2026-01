@@ -2,17 +2,14 @@ package com.carlosribeiro.apirestful.controller;
 
 import com.carlosribeiro.apirestful.dto.ProdutoCreate;
 import com.carlosribeiro.apirestful.dto.ProdutoDto;
-import com.carlosribeiro.apirestful.exception.EntidadeNaoEncontradaException;
-import com.carlosribeiro.apirestful.model.Produto;
 import com.carlosribeiro.apirestful.service.ProdutoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin("http://localhost:5173")
 @RestController
 @RequestMapping("produtos")
 public class ProdutoController {

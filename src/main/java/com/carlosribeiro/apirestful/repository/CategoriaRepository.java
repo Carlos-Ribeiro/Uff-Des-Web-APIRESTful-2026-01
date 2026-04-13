@@ -9,7 +9,7 @@ import java.util.List;
 public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
 
     @Query("select c from Categoria c " +
-        "left outer join fetch c.produtos " +
+        "left outer join c.produtos " +
         "order by c.id")
     List<Categoria> recuperarCategoriasComProdutos();
 }
