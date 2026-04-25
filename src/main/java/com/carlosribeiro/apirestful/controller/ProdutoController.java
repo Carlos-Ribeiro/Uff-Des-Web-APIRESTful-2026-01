@@ -20,7 +20,7 @@ public class ProdutoController {
     // http://localhost:8080/produtos
     @GetMapping
     public List<ProdutoDto> recuperarProdutos() {
-        return produtoService.recuperarProduos();
+        return produtoService.recuperarProdutos();
     }
 
     // http://localhost:8080/produtos/1
@@ -41,18 +41,18 @@ public class ProdutoController {
 
     @PostMapping
     public ProdutoDto cadastrarProduto(@RequestBody @Valid ProdutoCreate produtoCreate) {
-        return produtoService.cadastrarProduo(produtoCreate);
+        return produtoService.cadastrarProduto(produtoCreate);
     }
 
     @PutMapping
     public ProdutoDto alterarProduto(@RequestBody ProdutoDto produto) {
-        return produtoService.alterarProduo(produto);
+        return produtoService.alterarProduto(produto);
     }
 
     // http://localhost:8080/produtos/1
     @DeleteMapping("{idProduto}")
     public void removerProdutoPotId(@PathVariable("idProduto") long id) {
-        produtoService.removerProduoPorId(id);
+        produtoService.removerProdutoPorId(id);
     }
 }
 

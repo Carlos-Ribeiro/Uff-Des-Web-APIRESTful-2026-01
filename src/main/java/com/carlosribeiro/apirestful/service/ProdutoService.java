@@ -6,9 +6,7 @@ import com.carlosribeiro.apirestful.exception.EntidadeNaoEncontradaException;
 import com.carlosribeiro.apirestful.mapper.ProdutoMapper;
 import com.carlosribeiro.apirestful.model.Produto;
 import com.carlosribeiro.apirestful.repository.ProdutoRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,7 +19,7 @@ public class ProdutoService {
     @Autowired
     private ProdutoMapper produtoMapper;
 
-    public List<ProdutoDto> recuperarProduos() {
+    public List<ProdutoDto> recuperarProdutos() {
         List<Produto> produtos = produtoRepository.recuperarProduos();
         return produtoMapper.toProdutosDto(produtos);
     }
@@ -33,19 +31,19 @@ public class ProdutoService {
         return produtoMapper.toProdutoDto(produto);
     }
 
-    public ProdutoDto cadastrarProduo(ProdutoCreate produtoCreate) {
+    public ProdutoDto cadastrarProduto(ProdutoCreate produtoCreate) {
         Produto produto = produtoMapper.toProduto(produtoCreate);
         produto = produtoRepository.save(produto);
         return produtoMapper.toProdutoDto(produto);
     }
 
-    public ProdutoDto alterarProduo(ProdutoDto produtoDto) {
+    public ProdutoDto alterarProduto(ProdutoDto produtoDto) {
         Produto produto = produtoMapper.toProduto(produtoDto);
         produto = produtoRepository.save(produto);
         return produtoMapper.toProdutoDto(produto);
     }
 
-    public void removerProduoPorId(long id) {
+    public void removerProdutoPorId(long id) {
         recuperarProdutoPorId(id);
         produtoRepository.deleteById(id);
     }
