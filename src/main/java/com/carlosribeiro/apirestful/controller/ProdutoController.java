@@ -2,9 +2,12 @@ package com.carlosribeiro.apirestful.controller;
 
 import com.carlosribeiro.apirestful.dto.ProdutoCreate;
 import com.carlosribeiro.apirestful.dto.ProdutoDto;
+import com.carlosribeiro.apirestful.dto.ResultadoPaginado;
 import com.carlosribeiro.apirestful.service.ProdutoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -53,6 +56,22 @@ public class ProdutoController {
     @DeleteMapping("{idProduto}")
     public void removerProdutoPotId(@PathVariable("idProduto") long id) {
         produtoService.removerProdutoPorId(id);
+    }
+
+    // http://localhost:8080/produtos/paginacao?pagina=0&tamanho=3
+    @GetMapping("paginacao")
+    public ResultadoPaginado<ProdutoDto> recuperarProdutosComPaginacao(
+        @RequestParam(name = "pagina", defaultValue = "0") int pagina,
+        @RequestParam(name = "tamanho", defaultValue = "5") int tamanho,
+        @RequestParam(name = "nome", defaultValue = "") String nome
+    ) {
+        PageRequest pageRequest = PageRequest.of(pagina, tamanho);
+        Page<ProdutoDto> page = produtoService.recuperarProdutosComPaginacao(pageRequest, nome);
+        return new ResultadoPaginado<>(
+            page.getTotalElements(),
+            page.getTotalPages(),
+            page.getNumber(),
+            page.getContent());
     }
 }
 
