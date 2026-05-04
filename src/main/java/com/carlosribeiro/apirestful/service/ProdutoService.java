@@ -7,6 +7,8 @@ import com.carlosribeiro.apirestful.mapper.ProdutoMapper;
 import com.carlosribeiro.apirestful.model.Produto;
 import com.carlosribeiro.apirestful.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -46,5 +48,10 @@ public class ProdutoService {
     public void removerProdutoPorId(long id) {
         recuperarProdutoPorId(id);
         produtoRepository.deleteById(id);
+    }
+
+    public Page<ProdutoDto> recuperarProdutosComPaginacao(PageRequest pageRequest) {
+        Page<Produto> page = produtoRepository.recuperarProdutosComPaginacao(pageRequest);
+        return page.map((produto) -> produtoMapper.toProdutoDto(produto));
     }
 }
